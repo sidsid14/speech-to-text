@@ -22,12 +22,22 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "paths": {
+      "util": ["./node_modules/util"],
+      "fs": ["./node_modules/fs"],
+      "process": ["./node_modules/process"]
+    }
+    
   },
+  "files": ["src/polyfills.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "types": ["node"]
   }
 }
