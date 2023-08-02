@@ -1,1 +1,3 @@
-<p>speech-rec works!</p>
+<button (click)="loadModel()">Mic On</button>
+<button (click)="terminateRecognizer()">Mic Off</button>
+<div>{{ prediction.word }}</div>
