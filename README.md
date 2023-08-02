@@ -1,31 +1,80 @@
-# Speechrec
+# Speech To Text Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+Speech Command Recognition - Classify audio to detect sounds and trigger an action in your web app
 
-## Import Dependencies
+## Steps for Running project
 
-npm i @tensorflow-models/speech-commands @tensorflow/tfjs
+Execute `npm i` to install dependencies.
+Run `npm start` to execute the project.
 
-## Development server
+## Configuring Angular Project for Tensorflow.js
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To run tensorflow speech model following dependencies were required
 
-## Code scaffolding
+`npm i @tensorflow-models/speech-commands @tensorflow/tfjs util fs process`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`Updates in package.json`
+
+```json
+ "browser": {
+    "fs": false,
+    "crypto": false
+  }
+```
+
+`Updates in tsconfig.json`
+
+```json
+   "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "paths": {
+      "util": ["./node_modules/util"],
+      "fs": ["./node_modules/fs"],
+      "process": ["./node_modules/process"]
+    }
+    ...
+    "files": ["src/polyfills.ts"],
+    "angularCompilerOptions": {
+    ...
+    "types": ["node"]
+  }
+```
+
+`Updates in angular.json`
+
+```json
+
+    "build": {
+            ...
+            "polyfills": [
+              "zone.js",
+              "src/polyfills.ts"
+            ],
+    }
+    ...
+    "test": {
+        ...
+        "options": {
+        "polyfills": [
+            "zone.js",
+            "zone.js/testing",
+            "src/polyfills.ts"
+        ],
+        }
+```
+
+`Console logging the below message was required in the component to make sure the audio model got loaded properly`
+
+```
+console.log(tf.engine().backend);
+```
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## References
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[Tensorflow JS](https://www.tensorflow.org)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[Tensorflow Audio Model for speech command recognition](https://github.com/tensorflow/tfjs-models/tree/master/speech-commands)
